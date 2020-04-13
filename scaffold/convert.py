@@ -24,10 +24,25 @@ elif not newGithubOriginURL.endswith(".git"):
 
 newReadme = raw_input("Please enter a small description for your Readme: ")
 
+newGithubNameValue = ""
+shouldOverrideGithubName = False
+overrideGithubName = raw_input("Is your GitHub name Javin-Ambridge? (Y/n): ")
+if overrideGithubName != "Y":
+    shouldOverrideGithubName = True
+    newGithubName = raw_input("What is your GitHub name? ")
+    newGithubNameValue = newGithubName
+
 print("\nNew Settings. Please Confirm.")
 print("Repository Name: " + newRepoName)
 print("GitHub Origin URL: " + newGithubOriginURL)
 print("Readme Description: " + newReadme)
+
+if shouldOverrideGithubName == True:
+    print("Override GitHub Name: True")
+    print("New GitHub Name: " + newGithubNameValue)
+else:
+    print("Override GitHub Name: False")
+
 acceptSettings = raw_input("\nDo these settings look correct to you? (Y/n): ")
 
 if acceptSettings != "Y":
