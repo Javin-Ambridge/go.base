@@ -64,7 +64,7 @@ os.system("rm -r scaffold/")
 print("Tracking all of the new files on GitHub")
 os.system("git add -A")
 print("Adding a new commit")
-os.system("git add -m \"First Commit from Javin-Ambridge/go.base Scaffold.\"")
+os.system("git commit -m \"First Commit from Javin-Ambridge/go.base Scaffold.\"")
 
 print("\n\nDone.")
 print("Please go back one directory so your linux shell updates the directory structure (cd ..)")
