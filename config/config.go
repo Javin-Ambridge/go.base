@@ -3,13 +3,18 @@ package config
 import (
 	"os"
 
-	"go.uber.org/fx"
-
 	"github.com/Javin-Ambridge/go.base/go.base/constants"
-
 	"github.com/Javin-Ambridge/go.base/go.base/entity"
 	"github.com/Javin-Ambridge/go.base/go.base/utils/goutils"
 	"go.uber.org/config"
+	"go.uber.org/fx"
+)
+
+var (
+	serverEnvVariable = "SERVER_ENV"
+
+	baseYAMLPath       = "./config/base.yaml"
+	productionYAMLPath = "./config/production.yaml"
 )
 
 // Module exports all config resources to Fx at startup
@@ -19,7 +24,15 @@ var Module = fx.Provide(
 
 // New creates a new Config for the server
 func New() (entity.Config, error) {
-	provider, err := config.NewYAML(config.File("./config/base.yaml"))
+	// If we have the SERVER_ENV variable set, and its production, we are in production, else development
+	env := constants.EnvDevelopment
+	yamlPath := baseYAMLPath
+	if os.Getenv(serverEnvVariable) == constants.EnvProduction {
+		env = constants.EnvProduction
+		yamlPath = productionYAMLPath
+	}
+
+	provider, err := config.NewYAML(config.File(yamlPath))
 	if err != nil {
 		return entity.Config{}, goutils.ErrWrap(err)
 	}
@@ -29,11 +42,6 @@ func New() (entity.Config, error) {
 		return entity.Config{}, goutils.ErrWrap(err)
 	}
 
-	// If we have the SERVER_ENV variable set, and its production, we are in production, else development
-	conf.Env = constants.EnvDevelopment
-	if os.Getenv("SERVER_ENV") == constants.EnvProduction {
-		conf.Env = constants.EnvProduction
-	}
-
+	conf.Env = env
 	return conf, nil
 }
