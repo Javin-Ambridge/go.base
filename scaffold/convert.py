@@ -11,7 +11,7 @@ if newRepoName == "":
     print("Can't be empty.")
     sys.exit(1)
 
-newGithubOriginURL = raw_input("Please enter your new GitHub Repository origin URL (should look something like: \"https://github.com/Javin-Ambridge/zoom.eat.git\"): ")
+newGithubOriginURL = raw_input("Please enter your new GitHub Repository origin URL (should look something like: \"https://github.com/Javin-Ambridge/example.git\"): ")
 if newGithubOriginURL == "":
     print("Can't be empty.")
     sys.exit(1)
@@ -29,7 +29,7 @@ shouldOverrideGithubName = False
 overrideGithubName = raw_input("Is your GitHub name Javin-Ambridge? (Y/n): ")
 if overrideGithubName != "Y":
     shouldOverrideGithubName = True
-    newGithubName = raw_input("What is your GitHub name? ")
+    newGithubName = raw_input("What is your GitHub name?: ")
     newGithubNameValue = newGithubName
 
 print("\nNew Settings. Please Confirm.")
@@ -51,6 +51,11 @@ if acceptSettings != "Y":
 print("Converting Repository!")
 print("Renaming all instances of 'go.base' with \'" + newRepoName + "\' in .go files")
 os.system("find . -type f -name \"*.go\" -print0 | xargs -0 sed -i '' -e 's/go\.base/" + newRepoName + "/g'")
+
+if shouldOverrideGithubName == True:
+    print("Renaming GitHub name.")
+    os.system("find . -type f -name \"*.go\" -print0 | xargs -0 sed -i '' -e 's/Javin-Ambridge/" + newGithubNameValue + "/g'")
+
 print("Renaming all instances of 'go.base' with \'" + newRepoName + "\' in Makefile")
 os.system("find . -type f -name \"Makefile\" -print0 | xargs -0 sed -i '' -e 's/go\.base/" + newRepoName + "/g'")
 print("Updating README.md")
