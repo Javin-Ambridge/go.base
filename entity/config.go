@@ -11,3 +11,26 @@ type Config struct {
 	// ServerPort specifies the server port
 	ServerPort int `yaml:"serverPort"`
 }
+
+// Secrets contains the secrets for the server
+type Secrets struct {
+	// PostgresInfo is all of the postgresql information
+	PostgresInfo PostgresInfo `yaml:"postgres"`
+}
+
+type PostgresInfo struct {
+	// Name is the name for the postgresql server
+	Name string `yaml:"name"`
+
+	// Host is the host for the postgresql server
+	Host string `yaml:"host"`
+
+	// Port is the port number for your postgresql server
+	Port int `yaml:"port"`
+
+	// User is the user for your postgresql server
+	User string `yaml:"user"`
+
+	// Password is the password for your postgresql server
+	Password string `yaml:"password"`
+}

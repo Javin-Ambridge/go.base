@@ -8,7 +8,6 @@ clean: ## Trash binary files
 	@echo "--> cleaning..."
 	@go clean || (echo "Unable to clean project" && exit 1)
 	@rm -rf $(GOPATH)/bin/$(BINARY_NAME) 2> /dev/null
-	@rm c.out 2> /dev/null
 	@echo "Clean OK"
 
 test: ## Run all tests

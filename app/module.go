@@ -7,6 +7,7 @@ import (
 	"github.com/Javin-Ambridge/go.base/go.base/gateway"
 	"github.com/Javin-Ambridge/go.base/go.base/handler"
 	"github.com/Javin-Ambridge/go.base/go.base/observability"
+	"github.com/Javin-Ambridge/go.base/go.base/secrets"
 	"go.uber.org/fx"
 )
 
@@ -18,4 +19,5 @@ var Module = fx.Options(
 	controller.Module,
 	db.Module,
 	gateway.Module,
+	secrets.Module,
 )

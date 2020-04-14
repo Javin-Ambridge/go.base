@@ -19,12 +19,13 @@ This server is setup similar to how internal Uber services are setup, as well as
 | config | This Directory is used to define static YAML configurations. |
 | constants | This Directory is used to define any constants (metric fields, error messages, etc). |
 | controller | This Directory is used to build actual code logic.<br><br>Try to break your logic flows into controllers that you can call from the handler(s). |
-| db | This Directory is used to for any logic related to your database. |
+| db | This Directory is used to for any logic related to your database.<br><br>Initially provided is a PostgreSQL DB setup. |
 | entity | This Directory is used to any structures used in your service. |
-| handler | This Directory is used to define endpoint handlers (ie. Request comes in one type, and needs to leave the same type). |
 | gateway | This Directory is used to define any functions to interact with external services, applications, etc. |
+| handler | This Directory is used to define endpoint handlers (ie. Request comes in one type, and needs to leave the same type). |
 | observability | This Directory is used to define any Observability Options/Setup. This would be things like Loggers, M3 Metric Scopes, etc |
-| scaffold | This Directory contains the script to convert this go.base to your actual application. |
+| scaffold | This Directory contains the script to convert this go.base to your actual application.<br><br>This directory will be deleted after you convert the go.base application to your own. |
+| secrets | This Directory is used to store your application secrets.<br><br>The secrets.go file is looking for a YAML file called 'secrets.yaml' in this directory. |
 | server | This Directory is used to setup your HTTP server. |
 | utils | This Directory is used to define any Utilities. |
 
