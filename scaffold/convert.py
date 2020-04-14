@@ -55,6 +55,7 @@ os.system("find . -type f -name \"*.go\" -print0 | xargs -0 sed -i '' -e 's/go\.
 if shouldOverrideGithubName == True:
     print("Renaming GitHub name.")
     os.system("find . -type f -name \"*.go\" -print0 | xargs -0 sed -i '' -e 's/Javin-Ambridge/" + newGithubNameValue + "/g'")
+    os.system("find . -type f -name \"Makefile\" -print0 | xargs -0 sed -i '' -e 's/Javin-Ambridge/" + newGithubNameValue + "/g'")
 
 print("Renaming all instances of 'go.base' with \'" + newRepoName + "\' in Makefile")
 os.system("find . -type f -name \"Makefile\" -print0 | xargs -0 sed -i '' -e 's/go\.base/" + newRepoName + "/g'")
