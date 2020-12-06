@@ -1,8 +1,8 @@
 package postgres
 
 import (
-	"database/sql"
 	"fmt"
+	"github.com/jinzhu/gorm"
 
 	"github.com/Javin-Ambridge/go.base/go.base/entity"
 	"github.com/Javin-Ambridge/go.base/go.base/utils/goutils"
@@ -12,7 +12,7 @@ import (
 
 // For better testing
 var (
-	openDBConnection = sql.Open
+	openDBConnection = gorm.Open
 )
 
 // Postgres is the interface to the PostgreSQL DB
@@ -21,25 +21,25 @@ type Postgres interface {
 
 type postgres struct {
 	secrets entity.Secrets
-	db      *sql.DB
+	db      *gorm.DB
 }
 
 // New provides a new Postgres Interface to Fx
 func New(secrets entity.Secrets) (Postgres, error) {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=disable",
+		"dbname=%s sslmode=disable",
 		secrets.PostgresInfo.Host,
 		secrets.PostgresInfo.Port,
 		secrets.PostgresInfo.User,
-		secrets.PostgresInfo.Password,
 		secrets.PostgresInfo.Name,
 	)
 
 	// Create the connection to postgresql server
 	db, err := openDBConnection("postgres", psqlInfo)
 	if err != nil {
-		return nil, goutils.ErrWrap(err)
+		return nil, err
 	}
+	db.LogMode(false)
 
 	return &postgres{
 		secrets: secrets,
