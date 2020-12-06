@@ -5,7 +5,6 @@ import (
 	"github.com/jinzhu/gorm"
 
 	"github.com/Javin-Ambridge/go.base/go.base/entity"
-	"github.com/Javin-Ambridge/go.base/go.base/utils/goutils"
 
 	_ "github.com/lib/pq"
 )
