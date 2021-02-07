@@ -1,9 +1,11 @@
 
 # go.base  
   
-This Repository is a base Golang HTTP Server with a bunch of default setting up done. 
+This Repository is a base Golang HTTP(s) Server with a bunch of default boilerplate (Fx, PostgreSQL, Mocks, MakeFile, etc). 
 
-This can be used as a scaffold for future HTTP Golang Servers.
+This can be used as a scaffold for future HTTP(s) Golang Servers.
+
+You can read a more detailed explanation of this Scaffold on [Medium](https://javin-ambridge.medium.com/scaffolding-a-new-golang-http-service-f88ab8466104), including a step by step instruction set.
 
 ## Configurations
 This server is built on the [Uber-Go Fx Dependency Management system](https://github.com/uber-go/fx).
@@ -38,3 +40,7 @@ This server is setup similar to how internal Uber services are setup, as well as
  5. Run the scaffold/convert.py script (python scaffold/convert.py)
  6. Fill in the input
  7. Add, Commit, and Push to your new repository.
+ 
+ ## Questions
+ 
+ Feel free to put issues if you would like any more boilerplate added (or add a PR), can easily be achievable. 
