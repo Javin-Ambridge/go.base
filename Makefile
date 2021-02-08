@@ -38,3 +38,14 @@ mocks: ## Generates all the mocks
 	@$(GOPATH)/bin/mockgen -destination=.gen/mocks/http/http_response_writer_mock.go -package=mocks net/http ResponseWriter
 	@$(GOPATH)/bin/mockgen -destination=.gen/mocks/fx/lifecycle_mock.go -package=mocks go.uber.org/fx Lifecycle
 	@$(GOPATH)/bin/mockgen -destination=.gen/mocks/go.base/handler_mocks.go -package=mocks github.com/Javin-Ambridge/go.base/go.base/handler Handler
+
+
+install-golang:
+	@echo "--> installing base golang packages..."
+	@go get github.com/stretchr/testify/assert
+	@go get github.com/golang/mock/gomock
+	@go get github.com/shopspring/decimal
+	@go get github.com/jinzhu/gorm
+	@go get github.com/kubernetes/utils/pointer
+	@go get github.com/lib/pq
+

@@ -40,7 +40,17 @@ This server is setup similar to how internal Uber services are setup, as well as
  5. Run the scaffold/convert.py script (python scaffold/convert.py)
  6. Fill in the input
  7. Add, Commit, and Push to your new repository.
+
+## Running the Server
+
+Usually it's best to install the Golang Dependencies first:
+
+	make install-golang
+
+After that, just use the built in util:
+
+	make run
  
- ## Questions
+## Questions
  
  Feel free to put issues if you would like any more boilerplate added (or add a PR), can easily be achievable. 
