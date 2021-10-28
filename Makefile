@@ -51,5 +51,5 @@ install-golang:
 	@go get github.com/pkg/errors
 	@go get go.uber.org/config
 	@go get go.uber.org/fx
-	@go.uber.org/zap
+	@go get go.uber.org/zap
 
