@@ -48,4 +48,8 @@ install-golang:
 	@go get github.com/jinzhu/gorm
 	@go get github.com/kubernetes/utils/pointer
 	@go get github.com/lib/pq
+	@go get github.com/pkg/errors
+	@go get go.uber.org/config
+	@go get go.uber.org/fx
+	@go.uber.org/zap
 
