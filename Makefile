@@ -52,4 +52,5 @@ install-golang:
 	@go get go.uber.org/config
 	@go get go.uber.org/fx
 	@go get go.uber.org/zap
+	@go get github.com/mkideal/cli
 
