@@ -102,6 +102,10 @@ type Prompt struct {
 	Action func(ctx *TotalContext, response interface{})
 }
 
+func executeOsCommand() {
+
+}
+
 func exit(err error) {
 	color.Red("Exiting due to: " + err.Error())
 	os.Exit(1)
@@ -159,6 +163,11 @@ func main() {
 		},
 	}
 
+	pwd, err := os.Getwd()
+	if err != nil {
+		exit(err)
+	}
+
 	for _, p := range totalPrompts {
 		resp, err := p.PromptFn(p.Message)
 		if err != nil {
@@ -170,6 +179,8 @@ func main() {
 			exit(ctx.FailError)
 		}
 	}
+
+
 
 	color.Yellow("\nNew Settings. Please Confirm.")
 	fmt.Println("Repository Name: " + ctx.RepositoryName)
