@@ -274,7 +274,6 @@ func main() {
 	}
 
 	fmt.Println(fmt.Sprintf("\nDone [%d/%d].", len(executionCommands), len(executionCommands)))
-	fmt.Println("Please go back one directory so your linux shell updates the directory structure (cd ..)")
-	fmt.Println("Please add (git add -A), commit (git commit -m ...), and push (git push) to your new repository now.")
-	fmt.Println("Thank you!")
+	color.Yellow("Please run the following to refresh the directory in your shell (cd ../; cd %s/)", ctx.RepositoryName)
+	color.Yellow("Thank you for using this script! You are good to push (git push)")
 }
