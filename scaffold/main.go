@@ -240,7 +240,6 @@ func main() {
 			Message: fmt.Sprintf("Renaming directory ../go.base/ -> ../" + ctx.RepositoryName + "/"),
 			Commands: []string{
 				"mv ../go.base/ ../" + ctx.RepositoryName + "/",
-				"mv ../../go.base/ ../../" + ctx.RepositoryName + "/",
 			},
 		},
 		{
