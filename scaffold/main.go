@@ -104,8 +104,8 @@ type Prompt struct {
 }
 
 type ExecutionCmd struct {
-	Message string
-	Command []string
+	Message  string
+	Commands []string
 }
 
 func executeOsCommand(cmd string) {
@@ -207,56 +207,57 @@ func main() {
 	executionCommands := []ExecutionCmd{
 		{
 			Message: "Renaming all instances of 'go.base' with \"" + ctx.RepositoryName + "\" in .go files",
-			Command: []string{
+			Commands: []string{
 				"find . -type f -name \"*.go\" -print0 | xargs -0 sed -i '' -e 's/go.base/" + ctx.RepositoryName + "/g'",
 			},
 		},
 		{
 			Message: fmt.Sprintf("Renaming GitHub UserName, \"Javin-Ambridge\" -> %q.", ctx.GitHubUsername),
-			Command: []string{
+			Commands: []string{
 				"find . -type f -name \"*.go\" -print0 | xargs -0 sed -i '' -e 's/Javin-Ambridge/" + ctx.GitHubUsername + "/g'",
 				"find . -type f -name \"Makefile\" -print0 | xargs -0 sed -i '' -e 's/Javin-Ambridge/" + ctx.GitHubUsername + "/g'",
 			},
 		},
 		{
 			Message: fmt.Sprintf("Renaming all instances of 'go.base' with \"" + ctx.RepositoryName + "\" in Makefile"),
-			Command: []string{
+			Commands: []string{
 				"find . -type f -name \"Makefile\" -print0 | xargs -0 sed -i '' -e 's/go.base/" + ctx.RepositoryName + "/g'",
 			},
 		},
 		{
 			Message: "Updating README.md",
-			Command: []string{
+			Commands: []string{
 				"echo '# " + ctx.RepositoryName + " \n\n" + ctx.Description + "' > README.md",
 			},
 		},
 		{
 			Message: fmt.Sprintf("Setting new github origin URL (%q)", ctx.GitHubUsername),
-			Command: []string{
+			Commands: []string{
 				"git remote set-url origin " + ctx.OriginURL,
 			},
 		},
 		{
 			Message: fmt.Sprintf("Renaming directory ../go.base/ -> ../" + ctx.RepositoryName + "/"),
-			Command: []string{
+			Commands: []string{
 				"mv ../go.base/ ../" + ctx.RepositoryName + "/",
+				"mv ../../go.base/ ../../" + ctx.RepositoryName + "/",
 			},
 		},
 		{
 			Message: "Deleting the scaffold directory",
-			Command: []string{
+			Commands: []string{
 				"rm -r scaffold/",
 			},
 		},
 		{
 			Message: "Tracking all of the new files on GitHub",
-			Command: []string{
+			Commands: []string{
 				"git add -A",
 			},
 		},
 		{
 			Message: "Adding a new commit",
-			Command: []string{
+			Commands: []string{
 				"git commit -m \"First Commit from Javin-Ambridge/go.base Scaffold.\"",
 			},
 		},
@@ -265,6 +266,9 @@ func main() {
 	fmt.Print("\n")
 	for index, cmd := range executionCommands {
 		color.Yellow("[%d] %s", index + 1, cmd.Message)
+		for _, cmdRun := range cmd.Commands {
+			executeOsCommand(cmdRun)
+		}
 	}
 
 	fmt.Println(fmt.Sprintf("\nDone [%d/%d].", len(executionCommands), len(executionCommands)))
