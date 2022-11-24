@@ -7,6 +7,7 @@ import (
 	"os"
 	"strings"
 	"github.com/fatih/color"
+	"os/exec"
 )
 
 var (
@@ -102,8 +103,15 @@ type Prompt struct {
 	Action func(ctx *TotalContext, response interface{})
 }
 
-func executeOsCommand() {
+type ExecutionCmd struct {
+	Message string
+	Command []string
+}
 
+func executeOsCommand(cmd string) {
+	if err := exec.Command("bash", "-c", cmd).Run(); err != nil {
+		exit(err)
+	}
 }
 
 func exit(err error) {
@@ -167,6 +175,9 @@ func main() {
 	if err != nil {
 		exit(err)
 	}
+	if strings.HasSuffix(pwd, "/scaffold") {
+		exit(errors.New("please run this from the top level, not inside /scaffold"))
+	}
 
 	for _, p := range totalPrompts {
 		resp, err := p.PromptFn(p.Message)
@@ -179,8 +190,6 @@ func main() {
 			exit(ctx.FailError)
 		}
 	}
-
-
 
 	color.Yellow("\nNew Settings. Please Confirm.")
 	fmt.Println("Repository Name: " + ctx.RepositoryName)
@@ -195,17 +204,70 @@ func main() {
 		exit(errors.New("user mistyped settings"))
 	}
 
-	// First rename all of the instances of my GitHub username with theirs
-	color.Yellow("\nRenaming GitHub UserName, \"Javin-Ambridge\" -> %q.", ctx.GitHubUsername)
-	color.Yellow("Renaming all instances of 'go.base' with \"" + ctx.RepositoryName + "\" in Makefile")
-	color.Yellow("Updating README.md")
-	color.Yellow("Setting new github origin URL (%q)", ctx.GitHubUsername)
-	color.Yellow("Renaming directory ../go.base/ -> ../" + ctx.RepositoryName + "/")
-	color.Yellow("Deleting the scaffold directory")
-	color.Yellow("Tracking all of the new files on GitHub")
-	color.Yellow("Adding a new commit")
+	executionCommands := []ExecutionCmd{
+		{
+			Message: "Renaming all instances of 'go.base' with \"" + ctx.RepositoryName + "\" in .go files",
+			Command: []string{
+				"find . -type f -name \"*.go\" -print0 | xargs -0 sed -i '' -e 's/go.base/" + ctx.RepositoryName + "/g'",
+			},
+		},
+		{
+			Message: fmt.Sprintf("Renaming GitHub UserName, \"Javin-Ambridge\" -> %q.", ctx.GitHubUsername),
+			Command: []string{
+				"find . -type f -name \"*.go\" -print0 | xargs -0 sed -i '' -e 's/Javin-Ambridge/" + ctx.GitHubUsername + "/g'",
+				"find . -type f -name \"Makefile\" -print0 | xargs -0 sed -i '' -e 's/Javin-Ambridge/" + ctx.GitHubUsername + "/g'",
+			},
+		},
+		{
+			Message: fmt.Sprintf("Renaming all instances of 'go.base' with \"" + ctx.RepositoryName + "\" in Makefile"),
+			Command: []string{
+				"find . -type f -name \"Makefile\" -print0 | xargs -0 sed -i '' -e 's/go.base/" + ctx.RepositoryName + "/g'",
+			},
+		},
+		{
+			Message: "Updating README.md",
+			Command: []string{
+				"echo '# " + ctx.RepositoryName + " \n\n" + ctx.Description + "' > README.md",
+			},
+		},
+		{
+			Message: fmt.Sprintf("Setting new github origin URL (%q)", ctx.GitHubUsername),
+			Command: []string{
+				"git remote set-url origin " + ctx.OriginURL,
+			},
+		},
+		{
+			Message: fmt.Sprintf("Renaming directory ../go.base/ -> ../" + ctx.RepositoryName + "/"),
+			Command: []string{
+				"mv ../go.base/ ../" + ctx.RepositoryName + "/",
+			},
+		},
+		{
+			Message: "Deleting the scaffold directory",
+			Command: []string{
+				"rm -r scaffold/",
+			},
+		},
+		{
+			Message: "Tracking all of the new files on GitHub",
+			Command: []string{
+				"git add -A",
+			},
+		},
+		{
+			Message: "Adding a new commit",
+			Command: []string{
+				"git commit -m \"First Commit from Javin-Ambridge/go.base Scaffold.\"",
+			},
+		},
+	}
 
-	fmt.Println("\nDone.")
+	fmt.Print("\n")
+	for index, cmd := range executionCommands {
+		color.Yellow("[%d] %s", index + 1, cmd.Message)
+	}
+
+	fmt.Println(fmt.Sprintf("\nDone [%d/%d].", len(executionCommands), len(executionCommands)))
 	fmt.Println("Please go back one directory so your linux shell updates the directory structure (cd ..)")
 	fmt.Println("Please add (git add -A), commit (git commit -m ...), and push (git push) to your new repository now.")
 	fmt.Println("Thank you!")
