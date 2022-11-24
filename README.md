@@ -33,13 +33,14 @@ This server is setup similar to how internal Uber services are setup, as well as
 
 ## How to Clone use this as a Scaffold
 
- 1. Create a new directory named whatever you want at $GOPATH/src/github.com/GITHUB_NAME/
- 2. Go into that new directory
- 3. Clone this repository
- 4. Go into this new repository
- 5. Run the scaffold/convert.py script (python scaffold/convert.py)
+ 1. `cd $GOPATH/src/github.com/`
+ 2. Create a directory with your GitHub name if it doesn't exist (`mkdir Javin-Ambridge`)
+ 3. Navigate into your GitHub directory (`cd $GOPATH/src/github.com/GITHUB_NAME/`)   
+ 3. Clone this repository (`git clone https://github.com/Javin-Ambridge/go.base.git`)
+ 4. Go into this new repository (`cd go.base`)
+ 5. Run the scaffold script (`go run scaffold/main.go`)
  6. Fill in the input
- 7. Add, Commit, and Push to your new repository.
+ 7. Push to your new repository.
 
 ## Running the Server
 

@@ -178,6 +178,9 @@ func main() {
 	if strings.HasSuffix(pwd, "/scaffold") {
 		exit(errors.New("please run this from the top level, not inside /scaffold"))
 	}
+	if !strings.HasSuffix(pwd, "/go.base") {
+		exit(errors.New("please make sure you are in the go.base top level directory"))
+	}
 
 	for _, p := range totalPrompts {
 		resp, err := p.PromptFn(p.Message)
