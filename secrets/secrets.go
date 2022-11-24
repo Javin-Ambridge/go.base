@@ -1,8 +1,8 @@
 package secrets
 
 import (
-	"github.com/Javin-Ambridge/go.base/go.base/entity"
-	"github.com/Javin-Ambridge/go.base/go.base/utils/goutils"
+	"github.com/Javin-Ambridge/go.base/entity"
+	"github.com/Javin-Ambridge/go.base/utils/goutils"
 	"go.uber.org/config"
 	"go.uber.org/fx"
 )

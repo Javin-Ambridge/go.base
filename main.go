@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/Javin-Ambridge/go.base/go.base/app"
-	"github.com/Javin-Ambridge/go.base/go.base/server"
+	"github.com/Javin-Ambridge/go.base/app"
+	"github.com/Javin-Ambridge/go.base/server"
 	"go.uber.org/fx"
 )
 

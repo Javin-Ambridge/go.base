@@ -5,11 +5,11 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/Javin-Ambridge/go.base/go.base/entity"
+	"github.com/Javin-Ambridge/go.base/entity"
 	"go.uber.org/zap"
 
-	fxMocks "github.com/Javin-Ambridge/go.base/go.base/.gen/mocks/fx"
-	handlerMocks "github.com/Javin-Ambridge/go.base/go.base/.gen/mocks/go.base"
+	fxMocks "github.com/Javin-Ambridge/go.base/.gen/mocks/fx"
+	handlerMocks "github.com/Javin-Ambridge/go.base/.gen/mocks/go.base"
 	"github.com/golang/mock/gomock"
 )
 

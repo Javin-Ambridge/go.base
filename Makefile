@@ -1,5 +1,5 @@
 # VARIABLES
-PACKAGE="github.com/Javin-Ambridge/go.base/go.base"
+PACKAGE="github.com/Javin-Ambridge/go.base"
 BINARY_NAME="go.base"
 
 default: usage
@@ -37,7 +37,7 @@ mocks: ## Generates all the mocks
 	@mkdir .gen/mocks/
 	@$(GOPATH)/bin/mockgen -destination=.gen/mocks/http/http_response_writer_mock.go -package=mocks net/http ResponseWriter
 	@$(GOPATH)/bin/mockgen -destination=.gen/mocks/fx/lifecycle_mock.go -package=mocks go.uber.org/fx Lifecycle
-	@$(GOPATH)/bin/mockgen -destination=.gen/mocks/go.base/handler_mocks.go -package=mocks github.com/Javin-Ambridge/go.base/go.base/handler Handler
+	@$(GOPATH)/bin/mockgen -destination=.gen/mocks/go.base/handler_mocks.go -package=mocks github.com/Javin-Ambridge/go.base/handler Handler
 
 
 install-golang:

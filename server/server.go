@@ -4,12 +4,12 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/Javin-Ambridge/go.base/go.base/constants"
+	"github.com/Javin-Ambridge/go.base/constants"
 
 	"go.uber.org/zap"
 
-	"github.com/Javin-Ambridge/go.base/go.base/entity"
-	"github.com/Javin-Ambridge/go.base/go.base/handler"
+	"github.com/Javin-Ambridge/go.base/entity"
+	"github.com/Javin-Ambridge/go.base/handler"
 
 	"net/http"
 

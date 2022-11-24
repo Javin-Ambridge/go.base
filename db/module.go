@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/Javin-Ambridge/go.base/go.base/db/postgres"
+	"github.com/Javin-Ambridge/go.base/db/postgres"
 	"go.uber.org/fx"
 )
 

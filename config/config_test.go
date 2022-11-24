@@ -7,7 +7,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/Javin-Ambridge/go.base/go.base/constants"
+	"github.com/Javin-Ambridge/go.base/constants"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 
-	"github.com/Javin-Ambridge/go.base/go.base/entity"
+	"github.com/Javin-Ambridge/go.base/entity"
 
 	_ "github.com/lib/pq"
 )

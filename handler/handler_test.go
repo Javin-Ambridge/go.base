@@ -6,7 +6,7 @@ import (
 
 	"github.com/golang/mock/gomock"
 
-	httpMocks "github.com/Javin-Ambridge/go.base/go.base/.gen/mocks/http"
+	httpMocks "github.com/Javin-Ambridge/go.base/.gen/mocks/http"
 
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/zap"

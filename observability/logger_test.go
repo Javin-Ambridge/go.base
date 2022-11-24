@@ -8,11 +8,11 @@ import (
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 
-	"github.com/Javin-Ambridge/go.base/go.base/constants"
+	"github.com/Javin-Ambridge/go.base/constants"
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/Javin-Ambridge/go.base/go.base/entity"
+	"github.com/Javin-Ambridge/go.base/entity"
 )
 
 var (
